@@ -1,0 +1,470 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background: #f8f8f8;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+/* 導航欄 */
+nav {
+    width: 100vw;
+    background: #1a1a1a;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid #222;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 2rem;
+    transition: color 0.2s;
+}
+nav a:last-child { margin-right: 0; }
+nav a:hover { color: #ffcc00; }
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+/* 主視覺區塊 */
+.header-main {
+    width: 100vw;
+    background: linear-gradient(180deg, #232946 0%, #3a506b 100%);
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+.header-main h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+.header-main .en-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    color: #e0e0e0;
+}
+.header-main p {
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+}
+.header-main .cta-btn {
+    background: linear-gradient(45deg, #ff007f, #ffcc00);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.7rem 2rem;
+    border-radius: 9999px;
+    border: none;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 0, 127, 0.2);
+    transition: filter 0.2s;
+}
+.header-main .cta-btn:hover { filter: brightness(1.2); }
+.header-main .header-note {
+    color: #ffcc00;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+/* 輪播圖 */
+.header-carousel-wrapper, .header-carousel-slides, .header-carousel-slide {
+    width: 100vw;
+    min-height: 400px;
+    height: 400px;
+    position: relative;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+}
+.header-carousel-slides {
+    position: relative;
+}
+.header-carousel-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 400px;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.6s;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.header-carousel-slide:first-child {
+    opacity: 1;
+    z-index: 2;
+}
+.header-carousel-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+.carousel-img {
+    width: 100vw;
+    height: 400px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+}
+.carousel-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 10px 32px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 10;
+    text-align: center;
+}
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    z-index: 20;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.carousel-arrow.left { left: 24px; }
+.carousel-arrow.right { right: 24px; }
+.carousel-arrow:hover { background: rgba(0,0,0,0.8); }
+.carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 30;
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #bbb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.dot.active {
+    background: #ffcc00;
+}
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 固定右側按鈕 */
+.fixed-buttons {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1000;
+}
+.fixed-buttons .button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+    width: auto;
+    height: 50px;
+    padding: 0 1rem;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s, transform 0.2s;
+}
+.fixed-buttons .button:hover {
+    background-color: #fff;
+    transform: translateX(-10px) scale(1.05);
+}
+.fixed-buttons .button i {
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+.fixed-buttons .button:hover i {
+    transform: rotate(15deg);
+}
+.fixed-buttons .button span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 卡片區塊（職缺、公司特色等） */
+.jobs-section, .company-features, .apply-section {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0 auto 2rem auto;
+    padding: 2rem 0 1.5rem 0;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.jobs-section h2, .company-features h2, .apply-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+    text-align: center;
+}
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.job-card {
+    background: #232946;
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.job-card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    transform: translateY(-6px) scale(1.03);
+}
+.job-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.job-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
+    color: #ffcc00;
+}
+.job-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+.job-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+    color: #eee;
+}
+.job-card li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #ffcc00;
+    font-size: 0.9rem;
+    top: 4px;
+}
+.details-btn {
+    background: linear-gradient(45deg, #ff007f, #ff9900);
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    transition: filter 0.2s, transform 0.2s;
+}
+.details-btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.07);
+}
+.job-details {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #ffcc00;
+    color: #eee;
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+.job-details h4 {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ffcc00;
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+/* 公司特色區塊 */
+.company-features ul {
+    list-style: none;
+    padding: 0;
+    color: #333;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.company-features li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 1.1rem;
+}
+.company-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #ff007f;
+    font-weight: bold;
+    top: 2px;
+}
+
+/* 應徵方式區塊 */
+.apply-section p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.apply-section b a {
+    font-weight: 700;
+    text-decoration: none;
+    color: #ff007f;
+    border-bottom: 1px dashed #ff007f;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+.apply-section b a:hover {
+    color: #ffcc00;
+    border-bottom: 1px solid #ffcc00;
+}
+
+/* 頁尾 */
+.site-footer {
+    background: #1a1a1a;
+    color: #aaa;
+    padding: 3rem 1rem 2rem 1rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+.footer-qr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.qr-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 0.5rem;
+    border: 2px solid #ff007f;
+}
+.footer-copy {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    border-top: 1px solid #444;
+    padding-top: 1rem;
+}
+
+/* 主要容器居中 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 公司特色區塊 */
+#benefits {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 2rem auto;
+}
+
+/* 主要容器下的所有區塊通用樣式 */
+main > section {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/***** 響應式 *****/
+@media (max-width: 900px) {
+    .jobs-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+    .header-main h1 { font-size: 2rem; }
+    .header-main .en-title { font-size: 1.1rem; }
+    .header-carousel-wrapper, .header-carousel-slides, .header-carousel-slide, .carousel-img { height: 220px; min-height: 220px; }
+}
+@media (max-width: 600px) {
+    nav { flex-direction: column; padding: 0.5rem 0.5rem; }
+    .nav-links { flex-direction: column; gap: 0.5rem; }
+    .header-main { padding-top: 70px; padding-bottom: 20px; }
+    .jobs-section, .company-features, .apply-section { padding: 1.5rem 0.2rem; border-radius: 8px; }
+    .job-card { padding: 1rem 0.5rem; }
+    .footer-qr { gap: 1rem; }
+    .qr-img { width: 80px; height: 80px; }
+}
